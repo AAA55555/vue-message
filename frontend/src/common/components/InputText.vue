@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ErrorMessage, Field } from 'vee-validate'
-import type { InputTextType } from '@/common/types/InputTextType'
+import type { InputAuthType } from '@/types/InputAuthType'
 
-type PropsType = InputTextType & {
+type PropsType = InputAuthType & {
   autocomplete?: 'on' | 'off'
 }
 
@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<PropsType>(), {
           'border-2 border-red/50': errorMessage,
           'border-2 border-white': !errorMessage
         }"
-        class="w-full rounded-full px-4 py-1 text-sm text-gray-950 outline-0"
+        class="w-full rounded-full px-4 py-1 text-sm text-gray-950 outline-0 lg:text-base"
       />
     </Field>
     <ErrorMessage v-if="props.errorMsg" :name="name">

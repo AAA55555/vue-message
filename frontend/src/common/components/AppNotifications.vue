@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
-type NotificationType = 'info' | 'error' | 'success'
-
-const type: NotificationType = 'success'
-const isShowOpen = ref(false)
+import { useNotification } from '@/stores/notification.store'
+const { data, resetData } = useNotification()
 </script>
 
 <template>
   <transition name="note-fade">
-    <div v-if="isShowOpen" class="notification__wrapper" :class="`notification__wrapper_${type}`">
-      <p class="notification__text">text</p>
-      <button @click.stop="isShowOpen = !isShowOpen" class="notification__close">x</button>
+    <div
+      v-if="data.isShow"
+      class="notification__wrapper"
+      :class="`notification__wrapper_${data.type}`"
+    >
+      <p class="notification__text">{{ data.message }}</p>
+      <button @click.stop="resetData" class="notification__close">x</button>
     </div>
   </transition>
 </template>

@@ -10,5 +10,3 @@ import AppNotifications from '@/common/components/AppNotifications.vue'
     <slot></slot>
   </div>
 </template>
-
-<style scoped></style>

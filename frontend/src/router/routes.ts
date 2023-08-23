@@ -7,16 +7,18 @@ type RoutesType = {
   component: Component
   meta: {
     title: string
+    middlewares?: string[]
   }
 }
 
 const routers: RoutesType[] = [
   {
     path: '/',
-    name: 'IndexPage',
+    name: 'HomePage',
     component: IndexPage,
     meta: {
-      title: 'Социальная сеть'
+      title: 'Социальная сеть',
+      middlewares: ['auth']
     }
   },
   {

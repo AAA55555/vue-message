@@ -1,4 +1,4 @@
-export type InputTextType = {
+export type InputAuthType = {
   label?: string
   name: string
   type: string
