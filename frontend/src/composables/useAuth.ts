@@ -5,20 +5,42 @@ import {
   rest,
   refresh as refreshDirectus,
   createUser,
-  logout as logoutDirectus
+  logout as logoutDirectus,
+  readMe,
+  withToken
 } from '@directus/sdk'
+import type { DirectusUser } from '@directus/sdk'
 import { Directus } from '@/common/constants'
 import type { CreateUserType, UserType } from '@/types/UserType'
 import useToken from '@/composables/useToken'
 import { useAuthStore } from '@/stores/auth.store'
 import { useNotification } from '@/stores/notification.store'
+import { useUserStore } from '@/stores/user.store'
 
 export default function () {
   const router = useRouter()
   const { getToken, saveToken } = useToken()
   const authStore = useAuthStore()
+  const userStore = useUserStore()
   const { setParamNotification } = useNotification()
   const directus = createDirectus(Directus.BASE_URL)
+
+  const getMe = async () => {
+    try {
+      const userData = directus.with(rest())
+
+      if (typeof authStore.paramsAuth?.access_token === 'string') {
+        const user = await userData.request(
+          withToken(authStore.paramsAuth.access_token, readMe({ fields: ['*'] }))
+        )
+        userStore.setParamUser(<DirectusUser<any>>user)
+      } else {
+        setParamNotification({ message: 'Отсутствует access_token', type: 'error' })
+      }
+    } catch (e) {
+      errorFn(e)
+    }
+  }
 
   const login = async ({ email, password }: UserType): Promise<void> => {
     try {
@@ -29,6 +51,7 @@ export default function () {
         authStore.setAuthParams({ access_token, expires })
         saveToken({ refresh_token, expires: expires + Date.now() })
         setParamNotification({ message: authStore.SuccessMessage, type: 'success' })
+        await getMe()
       }
     } catch (e) {
       errorFn(e)
@@ -41,6 +64,7 @@ export default function () {
       await clientLogout.request(logoutDirectus(<string>useToken().getToken()))
       useToken().destroyToken()
       authStore.resetStore()
+      userStore.resetParamUser()
       await router.push('/login')
     } catch (e) {
       errorFn(e)
@@ -57,6 +81,7 @@ export default function () {
           authStore.setAuthParams({ access_token, expires })
           saveToken({ refresh_token, expires: expires + Date.now() })
         }
+        await getMe()
       } else {
         await router.push('/login')
       }

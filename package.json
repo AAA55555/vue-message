@@ -6,7 +6,8 @@
   "scripts": {
     "prepare": "husky install",
     "frontend::dev": "npm --prefix ./frontend run dev",
-    "frontend::lint": "npm --prefix ./frontend run lint && npm --prefix ./frontend run format",
+    "frontend::check": "npm --prefix ./frontend run lint::check && npm --prefix ./frontend run format::check",
+    "frontend::fix": "npm --prefix ./frontend run lint::fix && npm --prefix ./frontend run format::fix",
     "backend::dev": "npx --prefix ./backend run directus"
   },
   "repository": {

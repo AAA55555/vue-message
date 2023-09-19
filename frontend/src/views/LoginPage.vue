@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { string } from 'yup'
 import LoginForm from '@/modules/login/components/LoginForm.vue'
-import type { InputAuthType } from '@/types/InputAuthType'
+import type { InputType } from '@/types/InputType'
 import type { UserType } from '@/types/UserType'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
@@ -16,7 +16,7 @@ type FormData = UserType & {
   formRef: Ref<HTMLFormElement>
 }
 
-const formSchema: InputAuthType[] = [
+const formSchema: InputType[] = [
   {
     label: 'Почта',
     name: 'email',

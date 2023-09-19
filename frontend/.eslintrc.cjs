@@ -14,5 +14,8 @@ module.exports = {
   },
   globals: {
     module: "readonly"
+  },
+  rules: {
+    'no-unused-vars': ['error']
   }
 }

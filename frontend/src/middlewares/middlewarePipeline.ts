@@ -1,6 +1,6 @@
 interface IContext {
   to: object
-  next: <T>(data: T) => T
+  next: <T>() => T
 }
 
 interface IPayload {

@@ -4,8 +4,7 @@ import { useRoute } from 'vue-router'
 
 const defaultLayout = 'AppLayoutDefault'
 let nameLayout = useRoute().meta.layout || defaultLayout
-nameLayout = `./${nameLayout}.vue`
-const layout = defineAsyncComponent(() => import(nameLayout as string))
+const layout = defineAsyncComponent(() => import(`./${nameLayout}.vue` as string))
 </script>
 
 <template>

@@ -28,6 +28,15 @@ const routers: RoutesType[] = [
     meta: {
       title: 'Авторизация | Аутентификация'
     }
+  },
+  {
+    path: '/message',
+    name: 'MassagePage',
+    component: () => import('../views/MessagePage.vue'),
+    meta: {
+      title: 'Сообщение',
+      middlewares: ['auth']
+    }
   }
 ]
 

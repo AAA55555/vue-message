@@ -30,7 +30,7 @@ export const useNotification = defineStore('notification', () => {
     data.value.type = type
     setTimeout(() => {
       resetData()
-    }, 3500)
+    }, 4500)
   }
 
   return { data, setParamNotification, resetData }

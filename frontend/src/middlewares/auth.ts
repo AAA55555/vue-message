@@ -1,12 +1,13 @@
 import { useAuthStore } from '@/stores/auth.store'
 import useToken from '@/composables/useToken'
+import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 
-interface IPayload {
-  next: <T>(data: T) => T
+type PayloadType = {
+  next: NavigationGuardNext
   nextMiddleware: Function
-  to: <T>(data: T) => T
+  to: RouteLocationNormalized
 }
-export default function auth({ next, to, nextMiddleware }: IPayload) {
+export default function auth({ next, to, nextMiddleware }: PayloadType) {
   const storeAuth = useAuthStore()
   if (useToken().getToken() && !storeAuth.isAuthenticated) {
     return nextMiddleware()

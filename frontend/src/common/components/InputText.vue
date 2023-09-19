@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ErrorMessage, Field } from 'vee-validate'
-import type { InputAuthType } from '@/types/InputAuthType'
+import type { InputType } from '@/types/InputType'
 
-type PropsType = InputAuthType & {
+type PropsType = InputType & {
   autocomplete?: 'on' | 'off'
 }
 

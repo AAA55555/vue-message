@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply text-sm text-white lg:text-base;
+}
+
 .container {
   @apply mx-auto px-5 lg:max-w-[900px];
 }

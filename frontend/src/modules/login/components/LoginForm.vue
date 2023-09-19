@@ -4,10 +4,10 @@ import { Form } from 'vee-validate'
 import AppLoader from '@/common/components/AppLoader.vue'
 import AppButton from '@/common/components/AppButton.vue'
 import InputText from '@/common/components/InputText.vue'
-import type { InputAuthType } from '@/types/InputAuthType'
+import type { InputType } from '@/types/InputType'
 
 const props = defineProps<{
-  formSchema: InputAuthType[]
+  formSchema: InputType[]
   isShowLoader: boolean
 }>()
 
