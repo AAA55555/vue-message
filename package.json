@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
-    "frontend::dev": "npm --prefix ./frontend run dev",
     "frontend::check": "npm --prefix ./frontend run lint::check && npm --prefix ./frontend run format::check",
     "frontend::fix": "npm --prefix ./frontend run lint::fix && npm --prefix ./frontend run format::fix",
-    "backend::dev": "npx --prefix ./backend run directus"
+    "frontend::dev": "npm --prefix ./frontend run dev",
+    "backend::dev": "npm --prefix ./backend run directus"
   },
   "repository": {
     "type": "git",

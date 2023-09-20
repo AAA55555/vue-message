@@ -1,13 +1,26 @@
 <script setup lang="ts">
-import AppLayout from '@/layouts/AppLayout.vue'
+import { useRoute } from 'vue-router'
+import { defineAsyncComponent } from 'vue'
 import useAuth from '@/composables/useAuth'
 import { useAuthStore } from '@/stores/auth.store'
 import useToken from '@/composables/useToken'
-if (!useAuthStore().isAuthenticated && useToken().getToken()) {
-  useAuth().refresh()
+
+const { refresh } = useAuth()
+const { isAuthenticated } = useAuthStore()
+const { getToken } = useToken()
+
+if (!isAuthenticated && getToken()) {
+  refresh()
 }
+
+const defaultLayout = 'AppLayoutDefault'
+let nameLayout = useRoute().meta.layout || defaultLayout
+const layout = defineAsyncComponent(() => import(`./layouts/${nameLayout}.vue` as string))
 </script>
 
 <template>
-  <app-layout class="bg-gray-950"><router-view /></app-layout>
+  <component :is="layout" class="bg-gray-950">
+    <slot />
+    <router-view />
+  </component>
 </template>

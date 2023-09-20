@@ -25,7 +25,7 @@ export default function () {
   const { setParamNotification } = useNotification()
   const directus = createDirectus(Directus.BASE_URL)
 
-  const getMe = async () => {
+  const getMe = async (): Promise<void> => {
     try {
       const userData = directus.with(rest())
 
@@ -73,8 +73,8 @@ export default function () {
 
   const refresh = async (): Promise<void> => {
     try {
-      const refreshData = directus.with(authentication()).with(rest())
       if (getToken()) {
+        const refreshData = directus.with(authentication()).with(rest())
         const responseRefresh = await refreshData.request(refreshDirectus(<string>getToken()))
         const { access_token, expires, refresh_token } = responseRefresh
         if (access_token && expires && refresh_token) {
